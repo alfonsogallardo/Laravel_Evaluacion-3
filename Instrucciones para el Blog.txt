@@ -1,0 +1,7 @@
+-Crear Registro y login como aparece en el digrama
+-En el Home/main mostrar todos los post hechos por los usuarios indicando el titulo, contenido y nombre del autor
+-al hacer click en un post se llevara a una pagina donde se mostrara el contenido completo del post(no es prioritario)
+-al hacer click en el nombre del autor del post llevara a una pagina que mostrara todos los post de dicho autor
+-Solo se pueden crear post SI estas registrado y logeado en la pagina
+-Para crear un post se necesita el titulo, el contenido, su categoria y tipo(estos ultimos no son necesarios por ahora)
+-El creador del post puede editarlo o eliminarlo(soft delete)
