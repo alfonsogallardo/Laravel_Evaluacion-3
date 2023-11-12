@@ -3,40 +3,39 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Post;
-
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
-    public function dashboard()
+  /**
+     * Muestra el panel de control del usuario.
+     */
+    public function showDashboard()
     {
-        $user = auth()->user(); // Obtener el usuario autenticado
-        $posts = $user->posts; // Obtener las publicaciones del usuario
-        return view('users.dashboard', compact('user', 'posts'));
+        $user = Auth::user();
+
+        // Puedes personalizar la vista según tus necesidades
+        return view('user.dashboard', compact('user'));
     }
 
-    public function createPostForm()
+    /**
+     * Muestra la barra de navegación.
+     */
+    public function navigation()
     {
-        return view('users.create-post');
+        // Puedes personalizar la vista según tus necesidades
+        return view('partials.navigation');
     }
 
-    public function storePost(Request $request)
+    /**
+     * Muestra la lista de publicaciones del usuario con opciones para editar o eliminar.
+     */
+    public function showUserPosts()
     {
-        // Validación de datos del formulario
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
+        $user = Auth::user();
+        $posts = $user->posts;
 
-        // Crear una nueva publicación para el usuario autenticado
-        $user = auth()->user();
-        $post = new Post([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-        ]);
-
-        $user->posts()->save($post);
-
-        return redirect()->route('dashboard')->with('success', 'Publicación creada exitosamente.');
+        // Puedes personalizar la vista según tus necesidades
+        return view('user.posts', compact('user', 'posts'));
     }
 }
+

@@ -45,14 +45,13 @@ class PostController extends Controller
             'content' => 'required|string',
         ]);
 
-        // Crear la nueva publicación
-        $post = auth()->user()->posts()->create([
+        // Crear la nueva publicación asociada al usuario autenticado
+        auth()->user()->posts()->create([
             'title' => $request->title,
             'content' => $request->content,
         ]);
 
-        return redirect()->route('post.show', $post->id)
-            ->with('success', 'Publicación creada exitosamente');
+        return redirect()->route('home')->with('success', 'Publicación creada exitosamente');
     }
 
     /**
@@ -81,7 +80,7 @@ class PostController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('post.show', $post->id)
+        return redirect()->route('home.post.show', $post->id)
             ->with('success', 'Publicación actualizada exitosamente');
     }
 
@@ -93,7 +92,7 @@ class PostController extends Controller
         // Eliminar la publicación
         $post->delete();
 
-        return redirect()->route('blog.index')
+        return redirect()->route('home')
             ->with('success', 'Publicación eliminada exitosamente');
     }
 }

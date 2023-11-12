@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-     /**
+      /**
      * Muestra el formulario de registro.
      */
     public function showRegistrationForm()
@@ -23,10 +23,10 @@ class RegisterController extends Controller
     {
         // Validación de los datos del formulario
         $request->validate([
-            'username' => 'required|string|max:20|unique:users',
-            'first_name' => 'required|string|max:50',
-            'last_name' => 'required|string|max:50',
-            'email' => 'required|email|unique:users',
+            'username' => 'required|string|max:255|unique:users',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
@@ -42,7 +42,7 @@ class RegisterController extends Controller
         // Iniciar sesión automáticamente después del registro
         Auth::login($user);
 
-        return redirect()->route('home')->with('success', '¡Registro exitoso!');
+        return redirect()->route('home')->with('success', 'Registro exitoso');
     }
 
     /**
