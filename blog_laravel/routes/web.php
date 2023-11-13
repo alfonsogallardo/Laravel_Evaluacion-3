@@ -46,6 +46,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/login/navigation', [LoginController::class, 'navigation'])->name('login.navigation');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('register');
     Route::get('/user/posts', [UserController::class, 'showUserPosts'])->name('user.posts');
     Route::get('/posts/create', [CreatePostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [CreatePostController::class, 'store'])->name('posts.store');
