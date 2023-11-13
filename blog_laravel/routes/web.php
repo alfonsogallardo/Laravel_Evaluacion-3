@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CreatePostController;
+use Illuminate\Auth\Events\Login;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/login/navigation', [LoginController::class, 'navigation'])->name('login.navigation');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/login', [LoginController::class,'showLoginForm'])->name('login');
     Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('register');
     Route::get('/user/posts', [UserController::class, 'showUserPosts'])->name('user.posts');
     Route::get('/posts/create', [CreatePostController::class, 'create'])->name('posts.create');
